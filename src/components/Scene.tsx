@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
+import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js'
 import gsap from 'gsap'
 
 import {
@@ -110,20 +111,23 @@ export default function Scene() {
 		controls.enabled = false
 
 		setProgress(15, 'Loading models…')
+		const dracoLoader = new DRACOLoader()
+		dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/')
 		const loader = new GLTFLoader()
+		loader.setDRACOLoader(dracoLoader)
 		const loadGLTF = (url: string) =>
 			new Promise<any>((resolve, reject) => loader.load(url, resolve, undefined, reject))
 
 		const [chairGLTF, clockGLTF, sofaGLTF, coffeeTableGLTF, deskGLTF, macbookGLTF, tableLampGLTF, imacGLTF, bookshelfGLTF] = await Promise.all([
-			loadGLTF('/models/office_chair.glb'),
-			loadGLTF('/models/classic_wall_clock.glb'),
-			loadGLTF('/models/sofa_48.glb'),
-			loadGLTF('/models/coffee_table.glb'),
-			loadGLTF('/models/desk.glb'),
-			loadGLTF('/models/macbook_pro.glb'),
-			loadGLTF('/models/table_lamp.glb'),
-			loadGLTF('/models/imac_green.glb'),
-			loadGLTF('/models/bookshelf.glb'),
+			loadGLTF('/api/models/office_chair.glb'),
+			loadGLTF('/api/models/classic_wall_clock.glb'),
+			loadGLTF('/api/models/sofa_48.glb'),
+			loadGLTF('/api/models/coffee_table.glb'),
+			loadGLTF('/api/models/desk.glb'),
+			loadGLTF('/api/models/macbook_pro.glb'),
+			loadGLTF('/api/models/table_lamp.glb'),
+			loadGLTF('/api/models/imac_green.glb'),
+			loadGLTF('/api/models/bookshelf.glb'),
 		])
 
 		if (cancelled) return

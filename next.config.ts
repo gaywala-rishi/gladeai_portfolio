@@ -1,7 +1,7 @@
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-	webpack(config, { isServer }) {
+webpack(config, { isServer }) {
 		if (!isServer) {
 			const cacheGroups = config.optimization?.splitChunks?.cacheGroups ?? {}
 			config.optimization = {
