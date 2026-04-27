@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const BASE_URL =
-  "https://github.com/gaywala-rishi/gladeai_portfolio/releases/download/v1.1.1";
+  "https://github.com/gaywala-rishi/gladeai_portfolio/releases/download/v1.1.2";
 
 export async function GET(
   _req: NextRequest,

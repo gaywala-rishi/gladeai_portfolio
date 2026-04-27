@@ -149,7 +149,7 @@ export default function Scene() {
 
 		const laptopScreenMats: THREE.MeshStandardMaterial[] = []
 		const laptopGroup = buildLaptop(scene, laptopScreenMats, macbookGLTF)
-		buildImac(scene, laptopScreenMats, imacGLTF)
+		const imacGroup = buildImac(scene, laptopScreenMats, imacGLTF)
 		const bookshelfGroup = buildBookshelf(scene, bookshelfGLTF)
 		const frameResult = buildFrame(scene)
 		const { wallFrameGroup } = frameResult
@@ -183,7 +183,7 @@ export default function Scene() {
 			},
 			{
 				key: 'frame',
-				mesh: wallFrameGroup,
+				mesh: imacGroup,
 				icon: '🖼️',
 				text: 'About Me',
 				offset: new THREE.Vector3(0, 1.0, 0),
@@ -228,10 +228,10 @@ export default function Scene() {
 				camTarget: new THREE.Vector3(3.5, 2.0, -7.2),
 			},
 			{
-				mesh: wallFrameGroup,
+				mesh: imacGroup,
 				key: 'frame',
-				camPos: new THREE.Vector3(-1.7, 4.0, -6.5),
-				camTarget: new THREE.Vector3(-1.8, 4.0, -8.5),
+				camPos: new THREE.Vector3(0.1, 1.9, -6.8),
+				camTarget: new THREE.Vector3(0.1, 1.5, -5.9),
 			},
 			{
 				// Recliner chair → Contact

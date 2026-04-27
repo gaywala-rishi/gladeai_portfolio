@@ -13,7 +13,7 @@ export type LabelConfig = {
 export const LABEL_CONFIGS: LabelConfig[] = [
 	{ key: 'laptop',     position: new THREE.Vector3(-0.3, 2.0, -6.5),  emoji: '💻', text: 'Projects' },
 	{ key: 'bookshelf',  position: new THREE.Vector3(4.5,  2.5, -7.0),  emoji: '📚', text: 'Skills'   },
-	{ key: 'frame',      position: new THREE.Vector3(-4.0, 3.8, -5.8),  emoji: '🖼️', text: 'About Me' },
+	{ key: 'frame',      position: new THREE.Vector3(0.1,  2.2, -5.9),  emoji: '🖼️', text: 'About Me' },
 	{ key: 'character',  position: new THREE.Vector3(-3.5, 2.8, -7.0),  emoji: '👨‍💻', text: 'Contact'  }
 ];
 
