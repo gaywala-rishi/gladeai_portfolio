@@ -8,7 +8,6 @@ export interface SceneLights {
   fillRight: THREE.PointLight;
   deskGlow: THREE.PointLight;
   lampLight: THREE.PointLight;
-  ceilBounce: THREE.PointLight;
   charLight: THREE.PointLight;
 }
 
@@ -48,11 +47,6 @@ export function createLights(scene: THREE.Scene): SceneLights {
   lampLight.position.set(-2.2, 2.8, -2.8);
   scene.add(lampLight);
 
-  // Ceiling bounce (warm white for office)
-  const ceilBounce = new THREE.PointLight(0xfff8e8, 2.0, 18);
-  ceilBounce.position.set(0, 6.0, -4.0);
-  scene.add(ceilBounce);
-
   // Character area light
   const charLight = new THREE.PointLight(0xfff0e8, 1.5, 7);
   charLight.position.set(2, 4, -1.5);
@@ -65,7 +59,6 @@ export function createLights(scene: THREE.Scene): SceneLights {
     fillRight,
     deskGlow,
     lampLight,
-    ceilBounce,
     charLight,
   };
 }
@@ -74,7 +67,6 @@ export interface UpdateLightingArgs {
   lights: SceneLights;
   winPaneMats: THREE.MeshStandardMaterial[];
   winLight: THREE.PointLight;
-  ceilPanel: THREE.Mesh;
   nightLightPt?: THREE.SpotLight;
   laptopScreenMats: THREE.MeshStandardMaterial[];
   lampOn: boolean;
@@ -92,8 +84,7 @@ export function updateRoomLighting(args: UpdateLightingArgs, now: Date): void {
     onDeskGlowBase,
     onLampLightBase,
   } = args;
-  const { ambient, dirLight, fillLeft, fillRight, ceilBounce, charLight } =
-    lights;
+  const { ambient, dirLight, fillLeft, fillRight, charLight } = lights;
 
   const h24 = now.getHours() + now.getMinutes() / 60;
   // Office stays well-lit even at night (min 0.6)
@@ -151,7 +142,6 @@ export function updateRoomLighting(args: UpdateLightingArgs, now: Date): void {
 
   fillLeft.intensity = 1.2 + officeDayT * 0.6;
   fillRight.intensity = 1.0 + officeDayT * 0.5;
-  ceilBounce.intensity = 1.4 + officeDayT * 0.6;
   charLight.intensity = 1.2 + officeDayT * 0.3;
 
   onDeskGlowBase(2.0 + (1 - dayT) * 0.8);

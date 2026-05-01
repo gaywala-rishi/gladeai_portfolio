@@ -35,8 +35,8 @@ export function buildBookshelf(
 
   const bookshelfGroup = new THREE.Group();
   bookshelfGroup.add(model);
-  bookshelfGroup.position.set(4, 0, -8);
-  bookshelfGroup.rotation.y = -1.5;
+  bookshelfGroup.position.set(5, 0, -10.5);
+  bookshelfGroup.rotation.y = -1.55;
   scene.add(bookshelfGroup);
 
   return bookshelfGroup;

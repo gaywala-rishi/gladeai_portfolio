@@ -83,7 +83,7 @@ export function buildClockMesh(
   pin.position.z = faceZ + 0.02;
   clockGroup.add(hourPivot, minPivot, secPivot, pin);
 
-  clockGroup.position.set(0.8, 4.2, -8.3);
+  clockGroup.position.set(5.5, 5.5, -10.95);
   scene.add(clockGroup);
 
   return { hourPivot, minPivot, secPivot };

@@ -34,7 +34,7 @@ export function buildChair(scene: THREE.Scene, gltf: GLTFResult): THREE.Group {
 
   const chairGroup = new THREE.Group();
   chairGroup.add(model);
-  chairGroup.position.set(1.6, 0, -2.2);
+  chairGroup.position.set(0.5, 0, -7.3);
   chairGroup.rotation.y = CHAIR_ROT_Y;
   scene.add(chairGroup);
 

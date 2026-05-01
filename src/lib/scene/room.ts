@@ -1,17 +1,16 @@
 import * as THREE from "three";
-import { mat, gloss, emMat } from "./materials";
+import { mat, gloss } from "./materials";
 
 export interface RoomResult {
   winPaneMats: THREE.MeshStandardMaterial[];
   winLight: THREE.PointLight;
-  ceilPanel: THREE.Mesh;
 }
 
 export function buildRoom(scene: THREE.Scene): RoomResult {
-  const ROOM_W = 10,
-    ROOM_D = 9,
+  const ROOM_W = 13,
+    ROOM_D = 11.7,
     ROOM_H = 6.5,
-    ROOM_CZ = -4.0;
+    ROOM_CZ = -5.2;
   const wallColor = 0xd8d4ce;
   const ceilColor = 0xf2f0ee;
   const trimColor = 0xe8e6e0;
@@ -81,7 +80,7 @@ export function buildRoom(scene: THREE.Scene): RoomResult {
     new THREE.PlaneGeometry(ROOM_W, ROOM_H, 32, 20),
     makeWallMat(4, 2),
   );
-  backWall.position.set(0, ROOM_H / 2, -8.5);
+  backWall.position.set(0, ROOM_H / 2, -11.05);
   backWall.receiveShadow = true;
   scene.add(backWall);
 
@@ -89,7 +88,7 @@ export function buildRoom(scene: THREE.Scene): RoomResult {
     new THREE.PlaneGeometry(ROOM_D, ROOM_H, 28, 20),
     makeWallMat(3.5, 2),
   );
-  leftWall.position.set(-5, ROOM_H / 2, ROOM_CZ);
+  leftWall.position.set(-6.5, ROOM_H / 2, ROOM_CZ);
   leftWall.rotation.y = Math.PI / 2;
   leftWall.receiveShadow = true;
   scene.add(leftWall);
@@ -98,7 +97,7 @@ export function buildRoom(scene: THREE.Scene): RoomResult {
     new THREE.PlaneGeometry(ROOM_D, ROOM_H, 28, 20),
     makeWallMat(3.5, 2),
   );
-  rightWall.position.set(5, ROOM_H / 2, ROOM_CZ);
+  rightWall.position.set(6.5, ROOM_H / 2, ROOM_CZ);
   rightWall.rotation.y = -Math.PI / 2;
   rightWall.receiveShadow = true;
   scene.add(rightWall);
@@ -112,21 +111,12 @@ export function buildRoom(scene: THREE.Scene): RoomResult {
   ceil.position.set(0, ROOM_H, ROOM_CZ);
   scene.add(ceil);
 
-  // Ceiling inset panel (slightly recessed)
-  const ceilInset = new THREE.Mesh(
-    new THREE.PlaneGeometry(ROOM_W - 1.0, ROOM_D - 0.8, 28, 24),
-    makeWallMat(4.5, 3.5),
-  );
-  ceilInset.rotation.x = Math.PI / 2;
-  ceilInset.position.set(0, ROOM_H - 0.01, ROOM_CZ);
-  scene.add(ceilInset);
-
   // ── Crown molding (white) ──────────────────────────────────────────────────
   (
     [
-      [ROOM_W, new THREE.Vector3(0, 6.44, -8.46), 0],
-      [ROOM_D, new THREE.Vector3(-4.97, 6.44, ROOM_CZ), Math.PI / 2],
-      [ROOM_D, new THREE.Vector3(4.97, 6.44, ROOM_CZ), Math.PI / 2],
+      [ROOM_W, new THREE.Vector3(0, ROOM_H - 0.06, -11.0), 0],
+      [ROOM_D, new THREE.Vector3(-6.46, ROOM_H - 0.06, ROOM_CZ), Math.PI / 2],
+      [ROOM_D, new THREE.Vector3(6.46, ROOM_H - 0.06, ROOM_CZ), Math.PI / 2],
     ] as any[]
   ).forEach(([w, pos, ry]) => {
     const m = new THREE.Mesh(
@@ -141,9 +131,9 @@ export function buildRoom(scene: THREE.Scene): RoomResult {
   // Baseboard (white)
   (
     [
-      [ROOM_W, new THREE.Vector3(0, 0.07, -8.46), 0],
-      [ROOM_D, new THREE.Vector3(-4.97, 0.07, ROOM_CZ), Math.PI / 2],
-      [ROOM_D, new THREE.Vector3(4.97, 0.07, ROOM_CZ), Math.PI / 2],
+      [ROOM_W, new THREE.Vector3(0, 0.07, -11.0), 0],
+      [ROOM_D, new THREE.Vector3(-6.46, 0.07, ROOM_CZ), Math.PI / 2],
+      [ROOM_D, new THREE.Vector3(6.46, 0.07, ROOM_CZ), Math.PI / 2],
     ] as any[]
   ).forEach(([w, pos, ry]) => {
     const m = new THREE.Mesh(
@@ -155,67 +145,16 @@ export function buildRoom(scene: THREE.Scene): RoomResult {
     scene.add(m);
   });
 
-  // ── Recessed ceiling track lights ─────────────────────────────────────────
-  const ceilPanelMats: THREE.MeshStandardMaterial[] = [];
-  const trackPositions = [
-    [-3, -2.5],
-    [-3, -5.5],
-    [0, -2.5],
-    [0, -5.5],
-    [3, -2.5],
-    [3, -5.5],
-  ];
-  trackPositions.forEach(([tx, tz]) => {
-    const housing = new THREE.Mesh(
-      new THREE.CylinderGeometry(0.09, 0.09, 0.06, 16),
-      mat(0x222222, { roughness: 0.3, metalness: 0.6 }),
-    );
-    housing.position.set(tx, ROOM_H - 0.03, tz);
-    scene.add(housing);
-
-    const lightFace = new THREE.Mesh(
-      new THREE.CircleGeometry(0.072, 16),
-      new THREE.MeshStandardMaterial({
-        color: 0xfff8e0,
-        emissive: 0xfff0c0,
-        emissiveIntensity: 2.5,
-        roughness: 0.1,
-      }),
-    );
-    lightFace.rotation.x = Math.PI / 2;
-    lightFace.position.set(tx, ROOM_H - 0.061, tz);
-    scene.add(lightFace);
-    ceilPanelMats.push(lightFace.material as THREE.MeshStandardMaterial);
-  });
-
-  // Track rails connecting lights
-  [-3, 0, 3].forEach((tx) => {
-    const rail = new THREE.Mesh(
-      new THREE.BoxGeometry(0.04, 0.03, 3.1),
-      mat(0x333333, { roughness: 0.4, metalness: 0.7 }),
-    );
-    rail.position.set(tx, ROOM_H - 0.015, -4.0);
-    scene.add(rail);
-  });
-
-  // Dummy ceilPanel mesh so Scene.tsx still has a ref (kept minimal)
-  const ceilPanel = new THREE.Mesh(
-    new THREE.BoxGeometry(0.1, 0.01, 0.1),
-    emMat(0xffffff, 0xfff8e0, 1.0),
-  );
-  ceilPanel.position.set(0, ROOM_H + 1, 0); // hidden above ceiling
-  scene.add(ceilPanel);
-
   // ── Large back-wall windows with roller blinds ─────────────────────────────
   const winPaneMats: THREE.MeshStandardMaterial[] = [];
   const frameMat = mat(0x888880, { roughness: 0.4, metalness: 0.5 });
 
   // 3 window panels centered on back wall
-  const winPanelW = 2.0,
+  const winPanelW = 2.6,
     winH = 4.5,
     winY = 3.0,
     winGap = 0.14;
-  const winXPositions = [-2.2, 0, 2.2];
+  const winXPositions = [-2.86, 0, 2.86];
 
   winXPositions.forEach((wx) => {
     // Outer frame
@@ -223,32 +162,32 @@ export function buildRoom(scene: THREE.Scene): RoomResult {
       new THREE.BoxGeometry(winPanelW + 0.1, 0.08, 0.06),
       frameMat,
     );
-    frameTop.position.set(wx, winY + winH / 2 + 0.04, -8.47);
+    frameTop.position.set(wx, winY + winH / 2 + 0.04, -11.06);
     scene.add(frameTop);
     const frameBot = new THREE.Mesh(
       new THREE.BoxGeometry(winPanelW + 0.1, 0.08, 0.06),
       frameMat,
     );
-    frameBot.position.set(wx, winY - winH / 2 - 0.04, -8.47);
+    frameBot.position.set(wx, winY - winH / 2 - 0.04, -11.06);
     scene.add(frameBot);
     const frameL = new THREE.Mesh(
       new THREE.BoxGeometry(0.06, winH, 0.06),
       frameMat,
     );
-    frameL.position.set(wx - winPanelW / 2 - 0.03, winY, -8.47);
+    frameL.position.set(wx - winPanelW / 2 - 0.03, winY, -11.06);
     scene.add(frameL);
     const frameR = new THREE.Mesh(
       new THREE.BoxGeometry(0.06, winH, 0.06),
       frameMat,
     );
-    frameR.position.set(wx + winPanelW / 2 + 0.03, winY, -8.47);
+    frameR.position.set(wx + winPanelW / 2 + 0.03, winY, -11.06);
     scene.add(frameR);
     // Center mullion
     const mullion = new THREE.Mesh(
       new THREE.BoxGeometry(0.05, winH, 0.05),
       frameMat,
     );
-    mullion.position.set(wx, winY, -8.47);
+    mullion.position.set(wx, winY, -11.06);
     scene.add(mullion);
 
     // Glass panes (left + right of mullion)
@@ -267,7 +206,7 @@ export function buildRoom(scene: THREE.Scene): RoomResult {
         new THREE.PlaneGeometry(winPanelW / 2 - winGap, winH - winGap),
         paneMat,
       );
-      pane.position.set(wx + ox, winY, -8.48);
+      pane.position.set(wx + ox, winY, -11.07);
       scene.add(pane);
     });
 
@@ -278,7 +217,7 @@ export function buildRoom(scene: THREE.Scene): RoomResult {
       new THREE.PlaneGeometry(winPanelW - 0.12, blindH),
       blindMat,
     );
-    blind.position.set(wx, winY + winH / 2 - blindH / 2, -8.44);
+    blind.position.set(wx, winY + winH / 2 - blindH / 2, -11.03);
     scene.add(blind);
 
     // Blind housing at top
@@ -286,13 +225,13 @@ export function buildRoom(scene: THREE.Scene): RoomResult {
       new THREE.BoxGeometry(winPanelW + 0.06, 0.06, 0.08),
       mat(0x999890, { roughness: 0.4, metalness: 0.4 }),
     );
-    blindRail.position.set(wx, winY + winH / 2 + 0.03, -8.44);
+    blindRail.position.set(wx, winY + winH / 2 + 0.03, -11.03);
     scene.add(blindRail);
   });
 
   // Window point light
   const winLight = new THREE.PointLight(0xd4eaf5, 0.8, 12);
-  winLight.position.set(0, winY, -7.5);
+  winLight.position.set(0, winY, -9.75);
   scene.add(winLight);
 
   // ── Wall accent panel (right wall, behind bookshelf area) ─────────────────
@@ -300,16 +239,16 @@ export function buildRoom(scene: THREE.Scene): RoomResult {
     new THREE.PlaneGeometry(3.0, 4.0),
     mat(0xcfcbc4, { roughness: 0.9 }),
   );
-  accentPanel.position.set(4.97, 3.0, -6.5);
+  accentPanel.position.set(6.46, 3.9, -8.45);
   accentPanel.rotation.y = -Math.PI / 2;
   scene.add(accentPanel);
 
   // ── Ceiling border trim ───────────────────────────────────────────────────
   const borderMat = gloss(0xdddbd6, { roughness: 0.5, metalness: 0.1 });
   [
-    [ROOM_W, 0, ROOM_H - 0.02, -8.46, 0, 0.08, 0.04],
-    [ROOM_D, -4.97, ROOM_H - 0.02, ROOM_CZ, Math.PI / 2, 0.08, 0.04],
-    [ROOM_D, 4.97, ROOM_H - 0.02, ROOM_CZ, Math.PI / 2, 0.08, 0.04],
+    [ROOM_W, 0, ROOM_H - 0.02, -11.0, 0, 0.08, 0.04],
+    [ROOM_D, -6.46, ROOM_H - 0.02, ROOM_CZ, Math.PI / 2, 0.08, 0.04],
+    [ROOM_D, 6.46, ROOM_H - 0.02, ROOM_CZ, Math.PI / 2, 0.08, 0.04],
   ].forEach(([w, x, y, z, ry, h, d]) => {
     const m = new THREE.Mesh(
       new THREE.BoxGeometry(w as number, h as number, d as number),
@@ -320,5 +259,5 @@ export function buildRoom(scene: THREE.Scene): RoomResult {
     scene.add(m);
   });
 
-  return { winPaneMats, winLight, ceilPanel };
+  return { winPaneMats, winLight };
 }

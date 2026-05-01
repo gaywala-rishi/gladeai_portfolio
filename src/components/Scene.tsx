@@ -22,7 +22,6 @@ import { buildLamp } from "@/lib/scene/lamp";
 import { buildLaptop } from "@/lib/scene/laptop";
 import { buildImac } from "@/lib/scene/imac";
 import { buildBookshelf } from "@/lib/scene/bookshelf";
-import { buildFrame, updateWallFrameTime } from "@/lib/scene/frame";
 import { buildChair, CHAIR_ROT_Y } from "@/lib/scene/chair";
 import { buildSofa } from "@/lib/scene/sofa";
 import { buildClockMesh } from "@/lib/scene/clock-mesh";
@@ -165,7 +164,7 @@ export default function Scene() {
       const lampLightBaseRef = { current: 5.0 };
 
       setProgress(52, "Building room…");
-      const { winPaneMats, winLight, ceilPanel } = buildRoom(scene);
+      const { winPaneMats, winLight } = buildRoom(scene);
 
       setProgress(62, "Placing furniture…");
       buildDesk(scene, deskGLTF);
@@ -179,9 +178,6 @@ export default function Scene() {
       const laptopGroup = buildLaptop(scene, laptopScreenMats, macbookGLTF);
       const imacGroup = buildImac(scene, laptopScreenMats, imacGLTF);
       const bookshelfGroup = buildBookshelf(scene, bookshelfGLTF);
-      const frameResult = buildFrame(scene);
-      const { wallFrameGroup } = frameResult;
-
       // Owner on chair — Contact interactive
       const chairGroup = buildChair(scene, ownerOnChairGLTF);
       buildSofa(scene, sofaGLTF, coffeeTableGLTF, floorLampGLTF);
@@ -326,7 +322,6 @@ export default function Scene() {
             lights,
             winPaneMats,
             winLight,
-            ceilPanel,
             laptopScreenMats,
             lampOn,
             onDeskGlowBase: (v) => {
@@ -338,10 +333,6 @@ export default function Scene() {
           },
           now,
         );
-      }
-
-      function doUpdateWallFrame(now: Date) {
-        updateWallFrameTime(frameResult, now);
       }
 
       // ── Clock tick ────────────────────────────────────────────────────────
@@ -359,7 +350,6 @@ export default function Scene() {
         secPivot.rotation.z = -((s + ms / 1000) / 60) * Math.PI * 2;
         minPivot.rotation.z = -((m + (s + ms / 1000) / 60) / 60) * Math.PI * 2;
         hourPivot.rotation.z = -((h + m / 60) / 12) * Math.PI * 2;
-        doUpdateWallFrame(now);
         doUpdateLighting(now);
       }
 

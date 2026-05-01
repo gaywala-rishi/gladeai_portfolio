@@ -40,12 +40,9 @@ export function buildSofa(
 
   const sofaGroup = new THREE.Group();
   sofaGroup.add(model);
-  // After scale 1.3: sofa width = 3.5×1.3 = 4.55m, half = 2.275m
-  // Left wall at x=-5 → center.x = -5 + 2.275 = -2.725
   sofaGroup.position.set(-2.6, 0, -1.3);
   sofaGroup.rotation.y = Math.PI / 2;
   sofaGroup.scale.setScalar(1.3);
-  scene.add(sofaGroup);
 
   // ── Coffee table (GLB model) ───────────────────────────────────────────────
   const tableModel = coffeeTableGltf.scene;
@@ -60,12 +57,10 @@ export function buildSofa(
   const tBox = new THREE.Box3().setFromObject(tableModel);
   const tSize = new THREE.Vector3();
   tBox.getSize(tSize);
-  // Target ~1.1m on the longest horizontal axis
   const tScale = 1.1 / Math.max(tSize.x, tSize.z);
   tableModel.scale.setScalar(tScale);
   tableModel.updateMatrixWorld(true);
 
-  // Floor at y=0, centered on XZ
   const tBox2 = new THREE.Box3().setFromObject(tableModel);
   const tCenter = new THREE.Vector3();
   tBox2.getCenter(tCenter);
@@ -77,7 +72,6 @@ export function buildSofa(
   tableGroup.add(tableModel);
   tableGroup.position.set(-2.0, 0, -0.6);
   tableGroup.scale.setScalar(1.56);
-  scene.add(tableGroup);
 
   // ── Floor lamp (GLTF model) ───────────────────────────────────────────────
   const floorLampModel = floorLampGltf.scene;
@@ -92,12 +86,10 @@ export function buildSofa(
   const flBox = new THREE.Box3().setFromObject(floorLampModel);
   const flSize = new THREE.Vector3();
   flBox.getSize(flSize);
-  // Scale so lamp height ≈ 1.7m
   const flScale = 1.7 / flSize.y;
   floorLampModel.scale.setScalar(flScale);
   floorLampModel.updateMatrixWorld(true);
 
-  // Floor at y=0, centered on XZ
   const flBox2 = new THREE.Box3().setFromObject(floorLampModel);
   const flCenter = new THREE.Vector3();
   flBox2.getCenter(flCenter);
@@ -109,5 +101,13 @@ export function buildSofa(
   floorLampGroup.add(floorLampModel);
   floorLampGroup.position.set(-4.2, 0, -3.5);
   floorLampGroup.rotation.y = 0.6;
-  scene.add(floorLampGroup);
+
+  // ── Sofa area group ───────────────────────────────────────────────────────
+  const sofaAreaGroup = new THREE.Group();
+  sofaAreaGroup.add(sofaGroup);
+  sofaAreaGroup.add(tableGroup);
+  sofaAreaGroup.add(floorLampGroup);
+  sofaAreaGroup.scale.setScalar(1.3);
+  sofaAreaGroup.position.z = -0.2;
+  scene.add(sofaAreaGroup);
 }
