@@ -1,181 +1,190 @@
 /* ── Base reset ───────────────────────────────────────────────────────────── */
-*, *::before, *::after {
-	box-sizing: border-box;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-html, body {
-	margin: 0;
-	padding: 0;
-	height: 100%;
-	overflow: hidden;
-	background: #0d0d1a;
-	font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
-	-webkit-font-smoothing: antialiased;
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #0d0d1a;
+  font-family:
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* Static sub-pages (about, projects, contact) need scroll */
 body.scrollable {
-	overflow: auto;
+  overflow: auto;
 }
 
 /* ── Scene labels (world-space HTML overlaid on canvas) ───────────────────── */
 .scene-label {
-	position: absolute;
-	top: 0;
-	left: 0;
-	display: flex;
-	align-items: center;
-	gap: 6px;
-	padding: 5px 10px;
-	background: rgba(0 0 0 / 0.55);
-	backdrop-filter: blur(6px);
-	border-radius: 20px;
-	color: #fff;
-	font-size: 13px;
-	font-weight: 500;
-	pointer-events: none;
-	opacity: 0;
-	transition: opacity 0.25s ease;
-	white-space: nowrap;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  background: rgba(0 0 0 / 0.55);
+  backdrop-filter: blur(6px);
+  border-radius: 20px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  white-space: nowrap;
 }
 
-.label-emoji { font-size: 15px; }
+.label-emoji {
+  font-size: 15px;
+}
 
 /* ── Panel dynamic content (generated HTML strings in uiStore.ts) ─────────── */
 .panel-cards {
-	display: flex;
-	flex-direction: column;
-	gap: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .panel-card {
-	background: rgba(255 255 255 / 0.05);
-	border-radius: 10px;
-	padding: 14px 16px;
-	border: 1px solid rgba(255 255 255 / 0.08);
+  background: rgba(255 255 255 / 0.05);
+  border-radius: 10px;
+  padding: 14px 16px;
+  border: 1px solid rgba(255 255 255 / 0.08);
 }
 
 .panel-card h3 {
-	margin: 0 0 6px;
-	font-size: 15px;
-	color: #a0c0ff;
+  margin: 0 0 6px;
+  font-size: 15px;
+  color: #a0c0ff;
 }
 
 .panel-card p {
-	margin: 0 0 10px;
-	color: rgba(255 255 255 / 0.7);
-	font-size: 13px;
+  margin: 0 0 10px;
+  color: rgba(255 255 255 / 0.7);
+  font-size: 13px;
 }
 
 .tech-tags {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
 }
 
 .tech-tags span {
-	font-size: 11px;
-	padding: 3px 8px;
-	border-radius: 20px;
-	background: rgba(100 130 255 / 0.2);
-	color: #99bbff;
-	border: 1px solid rgba(100 130 255 / 0.3);
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 20px;
+  background: rgba(100 130 255 / 0.2);
+  color: #99bbff;
+  border: 1px solid rgba(100 130 255 / 0.3);
 }
 
 .skill-group {
-	margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .skill-group h3 {
-	font-size: 12px;
-	letter-spacing: 0.1em;
-	text-transform: uppercase;
-	color: rgba(255 255 255 / 0.4);
-	margin: 0 0 10px;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255 255 255 / 0.4);
+  margin: 0 0 10px;
 }
 
 .skill-group ul {
-	margin: 0;
-	padding: 0;
-	list-style: none;
-	display: flex;
-	flex-wrap: wrap;
-	gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .skill-group li {
-	font-size: 13px;
-	padding: 4px 12px;
-	border-radius: 20px;
-	background: rgba(255 255 255 / 0.07);
-	border: 1px solid rgba(255 255 255 / 0.1);
+  font-size: 13px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: rgba(255 255 255 / 0.07);
+  border: 1px solid rgba(255 255 255 / 0.1);
 }
 
 .about-panel h2 {
-	margin: 0 0 4px;
-	font-size: 22px;
+  margin: 0 0 4px;
+  font-size: 22px;
 }
 
 .about-panel .role {
-	color: #7799ff;
-	font-size: 14px;
-	margin: 0 0 16px;
+  color: #7799ff;
+  font-size: 14px;
+  margin: 0 0 16px;
 }
 
 .facts {
-	margin: 16px 0 0;
-	padding: 0;
-	list-style: none;
-	display: flex;
-	flex-direction: column;
-	gap: 6px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .facts li::before {
-	content: '▸ ';
-	color: #7799ff;
+  content: "▸ ";
+  color: #7799ff;
 }
 
 .contact-panel ul {
-	margin: 0;
-	padding: 0;
-	list-style: none;
-	display: flex;
-	flex-direction: column;
-	gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .contact-panel li {
-	display: flex;
-	gap: 12px;
+  display: flex;
+  gap: 12px;
 }
 
 .contact-panel strong {
-	min-width: 72px;
-	color: rgba(255 255 255 / 0.45);
-	font-size: 12px;
-	text-transform: uppercase;
-	letter-spacing: 0.06em;
-	padding-top: 1px;
+  min-width: 72px;
+  color: rgba(255 255 255 / 0.45);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding-top: 1px;
 }
 
 .contact-panel a {
-	color: #88aaff;
-	text-decoration: none;
+  color: #88aaff;
+  text-decoration: none;
 }
 
 .contact-panel a:hover {
-	text-decoration: underline;
+  text-decoration: underline;
 }
 
 .available-badge {
-	display: inline-block;
-	margin-bottom: 18px;
-	padding: 4px 12px;
-	border-radius: 20px;
-	background: rgba(80 200 120 / 0.15);
-	color: #80e8a0;
-	border: 1px solid rgba(80 200 120 / 0.3);
-	font-size: 12px;
-	font-weight: 600;
+  display: inline-block;
+  margin-bottom: 18px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: rgba(80 200 120 / 0.15);
+  color: #80e8a0;
+  border: 1px solid rgba(80 200 120 / 0.3);
+  font-size: 12px;
+  font-weight: 600;
 }

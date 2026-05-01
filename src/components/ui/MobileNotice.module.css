@@ -1,43 +1,43 @@
 .mobileNotice {
-	position: fixed;
-	inset: 0;
-	z-index: 200;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	gap: 16px;
-	padding: 32px 24px;
-	background: #0d0d1a;
-	color: #e8eeff;
-	text-align: center;
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 32px 24px;
+  background: #0d0d1a;
+  color: #e8eeff;
+  text-align: center;
 }
 
 .mobileNotice h2 {
-	font-size: 24px;
-	margin: 0;
-	color: #c8d8ff;
+  font-size: 24px;
+  margin: 0;
+  color: #c8d8ff;
 }
 
 .mobileNotice p {
-	font-size: 15px;
-	color: rgba(255 255 255 / 0.65);
-	line-height: 1.6;
-	margin: 0;
+  font-size: 15px;
+  color: rgba(255 255 255 / 0.65);
+  line-height: 1.6;
+  margin: 0;
 }
 
 .continueBtn {
-	margin-top: 8px;
-	padding: 10px 28px;
-	border-radius: 24px;
-	background: rgba(100 130 255 / 0.25);
-	border: 1px solid rgba(100 130 255 / 0.4);
-	color: #c8d8ff;
-	font-size: 14px;
-	cursor: pointer;
-	transition: background 0.15s;
+  margin-top: 8px;
+  padding: 10px 28px;
+  border-radius: 24px;
+  background: rgba(100 130 255 / 0.25);
+  border: 1px solid rgba(100 130 255 / 0.4);
+  color: #c8d8ff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.15s;
 }
 
 .continueBtn:hover {
-	background: rgba(100 130 255 / 0.4);
+  background: rgba(100 130 255 / 0.4);
 }

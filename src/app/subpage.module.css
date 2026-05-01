@@ -1,205 +1,221 @@
 /* Shared styles for static sub-pages (about, projects, contact). */
 
 .page {
-	min-height: 100vh;
-	background: #0d0d1a;
-	color: #e8eeff;
-	font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
-	-webkit-font-smoothing: antialiased;
-	max-width: 800px;
-	margin: 0 auto;
-	padding: 48px 24px 80px;
-	line-height: 1.7;
+  min-height: 100vh;
+  background: #0d0d1a;
+  color: #e8eeff;
+  font-family:
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+  line-height: 1.7;
 }
 
 .backLink {
-	display: inline-block;
-	margin-bottom: 48px;
-	color: #7799ff;
-	text-decoration: none;
-	font-size: 14px;
-	transition: color 0.15s;
+  display: inline-block;
+  margin-bottom: 48px;
+  color: #7799ff;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.15s;
 }
 
-.backLink:hover { color: #aabbff; }
+.backLink:hover {
+  color: #aabbff;
+}
 
 .page header {
-	margin-bottom: 56px;
+  margin-bottom: 56px;
 }
 
 .page h1 {
-	font-size: clamp(28px, 6vw, 48px);
-	margin: 0 0 8px;
-	color: #c8d8ff;
+  font-size: clamp(28px, 6vw, 48px);
+  margin: 0 0 8px;
+  color: #c8d8ff;
 }
 
 .role {
-	font-size: 18px;
-	color: #7799ff;
-	margin: 0 0 16px;
+  font-size: 18px;
+  color: #7799ff;
+  margin: 0 0 16px;
 }
 
 .badge {
-	display: inline-block;
-	padding: 4px 14px;
-	border-radius: 20px;
-	background: rgba(80 200 120 / 0.15);
-	color: #80e8a0;
-	border: 1px solid rgba(80 200 120 / 0.3);
-	font-size: 13px;
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 20px;
+  background: rgba(80 200 120 / 0.15);
+  color: #80e8a0;
+  border: 1px solid rgba(80 200 120 / 0.3);
+  font-size: 13px;
 }
 
 .page section {
-	margin-bottom: 48px;
+  margin-bottom: 48px;
 }
 
 .page h2 {
-	font-size: 20px;
-	color: #c8d8ff;
-	margin: 0 0 16px;
-	padding-bottom: 10px;
-	border-bottom: 1px solid rgba(255 255 255 / 0.07);
+  font-size: 20px;
+  color: #c8d8ff;
+  margin: 0 0 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255 255 255 / 0.07);
 }
 
 .page h3 {
-	font-size: 16px;
-	color: #99bbff;
-	margin: 0 0 12px;
+  font-size: 16px;
+  color: #99bbff;
+  margin: 0 0 12px;
 }
 
 .page p {
-	color: rgba(255 255 255 / 0.7);
-	margin: 0 0 12px;
+  color: rgba(255 255 255 / 0.7);
+  margin: 0 0 12px;
 }
 
 .page ul {
-	padding-left: 0;
-	list-style: none;
-	display: flex;
-	flex-direction: column;
-	gap: 8px;
+  padding-left: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .page li {
-	color: rgba(255 255 255 / 0.7);
-	font-size: 15px;
+  color: rgba(255 255 255 / 0.7);
+  font-size: 15px;
 }
 
 .page li::before {
-	content: '▸ ';
-	color: #7799ff;
+  content: "▸ ";
+  color: #7799ff;
 }
 
 .links {
-	display: flex;
-	gap: 12px;
-	flex-wrap: wrap;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
 .linkBtn {
-	padding: 9px 22px;
-	border-radius: 24px;
-	text-decoration: none;
-	font-size: 14px;
-	font-weight: 500;
-	transition: opacity 0.15s;
+  padding: 9px 22px;
+  border-radius: 24px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: opacity 0.15s;
 }
 
-.linkBtn:hover { opacity: 0.8; }
+.linkBtn:hover {
+  opacity: 0.8;
+}
 
 .linkBtnPrimary {
-	background: rgba(100 130 255 / 0.25);
-	border: 1px solid rgba(100 130 255 / 0.4);
-	color: #c8d8ff;
+  background: rgba(100 130 255 / 0.25);
+  border: 1px solid rgba(100 130 255 / 0.4);
+  color: #c8d8ff;
 }
 
 .linkBtnSecondary {
-	background: rgba(255 255 255 / 0.06);
-	border: 1px solid rgba(255 255 255 / 0.15);
-	color: rgba(255 255 255 / 0.7);
+  background: rgba(255 255 255 / 0.06);
+  border: 1px solid rgba(255 255 255 / 0.15);
+  color: rgba(255 255 255 / 0.7);
 }
 
 /* Projects page */
 .projectGrid {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-	gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
 }
 
 .projectCard {
-	background: rgba(255 255 255 / 0.04);
-	border: 1px solid rgba(255 255 255 / 0.08);
-	border-radius: 14px;
-	padding: 24px;
+  background: rgba(255 255 255 / 0.04);
+  border: 1px solid rgba(255 255 255 / 0.08);
+  border-radius: 14px;
+  padding: 24px;
 }
 
 .projectCard h2 {
-	font-size: 18px;
-	margin: 0 0 10px;
-	border: none;
-	padding: 0;
+  font-size: 18px;
+  margin: 0 0 10px;
+  border: none;
+  padding: 0;
 }
 
 .techList {
-	flex-direction: row !important;
-	flex-wrap: wrap;
-	gap: 6px;
-	margin-bottom: 16px;
+  flex-direction: row !important;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 16px;
 }
 
 .techList li {
-	font-size: 11px;
-	padding: 3px 9px;
-	border-radius: 20px;
-	background: rgba(100 130 255 / 0.15);
-	color: #99bbff;
-	border: 1px solid rgba(100 130 255 / 0.25);
+  font-size: 11px;
+  padding: 3px 9px;
+  border-radius: 20px;
+  background: rgba(100 130 255 / 0.15);
+  color: #99bbff;
+  border: 1px solid rgba(100 130 255 / 0.25);
 }
 
-.techList li::before { content: none; }
+.techList li::before {
+  content: none;
+}
 
 .projectLink {
-	font-size: 13px;
-	color: #88aaff;
-	text-decoration: none;
+  font-size: 13px;
+  color: #88aaff;
+  text-decoration: none;
 }
 
-.projectLink:hover { text-decoration: underline; }
+.projectLink:hover {
+  text-decoration: underline;
+}
 
 /* Contact page */
-.page address { font-style: normal; }
+.page address {
+  font-style: normal;
+}
 
 .dlList {
-	display: flex;
-	flex-direction: column;
-	gap: 16px;
-	margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0;
 }
 
 .dlRow {
-	display: flex;
-	gap: 16px;
-	align-items: baseline;
+  display: flex;
+  gap: 16px;
+  align-items: baseline;
 }
 
 .dlRow dt {
-	min-width: 80px;
-	font-size: 11px;
-	font-weight: 700;
-	letter-spacing: 0.08em;
-	text-transform: uppercase;
-	color: rgba(255 255 255 / 0.35);
+  min-width: 80px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255 255 255 / 0.35);
 }
 
 .dlRow dd {
-	margin: 0;
-	font-size: 15px;
-	color: rgba(255 255 255 / 0.75);
+  margin: 0;
+  font-size: 15px;
+  color: rgba(255 255 255 / 0.75);
 }
 
 .dlRow dd a {
-	color: #88aaff;
-	text-decoration: none;
+  color: #88aaff;
+  text-decoration: none;
 }
 
-.dlRow dd a:hover { text-decoration: underline; }
+.dlRow dd a:hover {
+  text-decoration: underline;
+}
